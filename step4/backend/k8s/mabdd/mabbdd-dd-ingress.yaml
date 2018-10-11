@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mabdd-dd-ingress
+  namespace: packapp02
+spec:
+  rules:
+  - host: mabddapp02-dd.hackathon-container.com
+    http:
+      paths:
+      - backend:
+          serviceName: mysql-packapp02-svc
+          servicePort: 3306
+#  tls:
+#  - hosts:
+#    - mabddapp02-dd.hackathon-container.com
+

@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: monapp-dd-ingress
+  namespace: packapp02
+spec:
+  rules:
+  - host: monapp02-dd.hackathon-container.com
+    http:
+      paths:
+      - backend:
+          serviceName: monapp-dd-svc
+          servicePort: 95
+  tls:
+  - hosts:
+    - monapp02-dd.hackathon-container.com
+

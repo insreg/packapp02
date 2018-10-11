@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mabdd-dd-deployment
+  namespace: packapp02
+spec:
+  selector:
+    matchLabels:
+      app: mabdd-dd
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mabdd-dd
+    spec:
+      containers:
+      - name: mysql-dd
+        image: registry.hackathon-container.com/packapp02/mysql-dd-seted:1.0
+#        image: mysql:5.5
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: ""  
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: "1"    
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      nodeSelector:
+        node: node1
+      imagePullSecrets:
+      - name: registry
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: packapp02-dd-disk
+

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monapp-dd-deployment
+  namespace: packapp02
+spec:
+  selector:
+    matchLabels:
+      app: monapp-dd
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: monapp-dd
+    spec:
+      containers:
+      - name: dede-cb
+        image: registry.hackathon-container.com/packapp02/dede-cb-mysql:1.0
+#        image: registry.hackathon-container.com/packapp02/dede-cb:1.0
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: registry
+

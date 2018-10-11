@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: initdb-dd-deployment
+  namespace: packapp02
+spec:
+  selector:
+    matchLabels:
+      app: initdb-dd
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: initdb-dd
+    spec:
+      containers:
+      - name: initdb-cb
+        image: registry.hackathon-container.com/packapp02/dede-initbdd:1.1
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: registry

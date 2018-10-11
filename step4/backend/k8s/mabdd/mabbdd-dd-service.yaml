@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-packapp02-svc
+  namespace: packapp02
+spec:
+#  type: ClusterIP
+#  ClusterIP: None
+  ports:
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP
+  selector:
+    app: mabdd-dd
+
